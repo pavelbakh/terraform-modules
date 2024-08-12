@@ -28,7 +28,6 @@ variable "delimiter" {
   description = "Delimiter between ID elements."
 }
 
-
 variable "label_case" {
   type        = string
   default     = null
