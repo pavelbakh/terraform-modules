@@ -1,3 +1,9 @@
+<!-- Space: DCG -->
+<!-- Parent: 3301968357 -->
+<!-- Title: Devoteam Terraform Modules Repository -->
+
+<!-- Include: ./disclaimer.md -->
+
 # Devoteam Terraform Modules Repository
 
 Welcome to the Terraform Modules repository! This repository serves as a centralized hub for storing and managing reusable Terraform Modules.

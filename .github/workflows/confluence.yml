@@ -1,0 +1,24 @@
+name: Publish to Confluence
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    container:
+        image: kovetskiy/mark:latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Publish Markdown to Confluence
+        run: mark
+        env:
+          MARK_CI: true
+          MARK_BASE_URL: https://devoteam.atlassian.net/wiki
+          MARK_USERNAME: ${{ secrets.ATLASSIAN_USERNAME }}
+          MARK_PASSWORD: ${{ secrets.ATLASSIAN_API_TOKEN }}
+          MARK_SPACE: DCG
+          MARK_FILES: "README.md"
