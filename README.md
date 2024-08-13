@@ -1,6 +1,6 @@
 <!-- Space: DCG -->
-<!-- Parent: Devoteam+A+Cloud+Germany -->
-<!-- Parent: Tech+Documentation -->
+<!-- Parent: Devoteam A Cloud Germany -->
+<!-- Parent: Tech Documentation -->
 <!-- Title: Devoteam Terraform Modules Repository -->
 
 <!-- Include: ./disclaimer.md -->
