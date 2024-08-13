@@ -40,9 +40,9 @@ module "example" {
 ## Resources
 | Type   | Name         | Description                         |
 |--------|--------------|-------------------------------------|
-| Label  | [tf-label](tf-label)        | Terraform module for consistent names and tags generation for resources.  |
-| AWS Lambda | [tf-aws-lambda](tf-aws-lambda)        | Terraform module for launching Lambda Functions  |
-| AWS Lambda Layer | [tf-aws-lambda-layer](tf-aws-lambda-layer)        | Terraform module for Lambda Functions Layer definition  |
+| Label  | [tf-label](https://github.com/Devoteam/terraform-modules/tree/main/tf-label)        | Terraform module for consistent names and tags generation for resources.  |
+| AWS Lambda | [tf-aws-lambda](https://github.com/Devoteam/terraform-modules/tree/main/tf-aws-lambda)        | Terraform module for launching Lambda Functions  |
+| AWS Lambda Layer | [tf-aws-lambda-layer](https://github.com/Devoteam/terraform-modules/tree/main/tf-aws-lambda-layer)        | Terraform module for Lambda Functions Layer definition  |
 
 ## Contributing
 
