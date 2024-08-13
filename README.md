@@ -10,7 +10,7 @@ The purpose of this repository is to provide a single location for storing and s
 
 The repository is organized as follows:
 
-- `modules/`: Contains reusable Terraform Modules that can be referenced from other repositories.
+- `./`: Contains reusable Terraform Modules that can be referenced from other repositories.
 
 ## Usage
 
@@ -33,9 +33,9 @@ module "example" {
 ## Resources
 | Type   | Name         | Description                         |
 |--------|--------------|-------------------------------------|
-| Label  | [tf-label](modules/tf-label)        | Terraform module for consistent names and tags generation for resources.  |
-| AWS Lambda | [tf-aws-lambda](modules/tf-aws-lambda)        | Terraform module for launching Lambda Functions  |
-| AWS Lambda Layer | [tf-aws-lambda-layer](modules/tf-aws-lambda-layer)        | Terraform module for Lambda Functions Layer definition  |
+| Label  | [tf-label](tf-label)        | Terraform module for consistent names and tags generation for resources.  |
+| AWS Lambda | [tf-aws-lambda](tf-aws-lambda)        | Terraform module for launching Lambda Functions  |
+| AWS Lambda Layer | [tf-aws-lambda-layer](tf-aws-lambda-layer)        | Terraform module for Lambda Functions Layer definition  |
 
 ## Contributing
 

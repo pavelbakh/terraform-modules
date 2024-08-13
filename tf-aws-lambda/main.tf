@@ -5,7 +5,7 @@ locals {
 }
 
 module "name" {
-  source      = "git::https://github.com/devoteam/terraform-modules.git//modules/tf-label"
+  source      = "git::https://github.com/devoteam/terraform-modules.git//tf-label"
   namespace   = var.namespace
   environment = var.environment
   project     = var.project
