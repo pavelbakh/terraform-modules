@@ -1,6 +1,5 @@
 <!-- Space: DCG -->
 <!-- Parent: 3301965878 -->
-<!-- Parent: 3301968357 -->
 <!-- Title: Devoteam Terraform Modules Repository -->
 
 <!-- Include: ./disclaimer.md -->
