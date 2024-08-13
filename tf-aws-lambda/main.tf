@@ -5,7 +5,7 @@ locals {
 }
 
 module "name" {
-  source      = "../tf-label"
+  source      = "../"
   namespace   = var.namespace
   environment = var.environment
   project     = var.project
