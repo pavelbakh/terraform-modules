@@ -6,7 +6,7 @@ This module deploys an AWS Lambda function from a Zip file uploaded to AWS S3 bu
 
 ```
 module "lambda" {
-  source  = "devoteam/terraform-modules/tf-aws-lambda"
+  source  = "git::https://github.com/devoteam/terraform-modules.git//tf-aws-lambda"
 
   namespace         = "devoteam"
   environment       = "prod"

@@ -6,7 +6,7 @@ This module define an AWS Lambda function layer as a Zip file uploaded to AWS S3
 
 ```
 module "lambda-layer" {
-  source  = "devoteam/terraform-modules/tf-aws-lambda-layer"
+  source  = "git::https://github.com/devoteam/terraform-modules.git//tf-aws-lambda-layer"
 
   namespace             = "devoteam"
   environment           = "prod"

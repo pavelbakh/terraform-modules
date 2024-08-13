@@ -34,7 +34,7 @@ variable "label_case" {
   description = "Letter case of label elements"
 
   validation {
-    condition     = var.label_case == null ? true : contains(["lower", "upper"], var.label_value_case)
+    condition     = var.label_case == null ? true : contains(["lower", "upper"], var.label_case)
     error_message = "Allowed values: `lower`, `upper`."
   }
 }

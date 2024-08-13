@@ -31,7 +31,7 @@ component=**value**
 
 ```
 module "name" {
-  source   = "devoteam/terraform-modules/tf-label"
+  source   = "../tf-label"
 
   namespace     = "devoteam"
   environment   = "prod"

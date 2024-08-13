@@ -5,7 +5,7 @@ locals {
 }
 
 module "name" {
-  source      = "../"
+  source      = "../tf-label"
   namespace   = var.namespace
   environment = var.environment
   project     = var.project
@@ -33,14 +33,14 @@ data "aws_iam_policy_document" "assume_role_policy" {
 
     principals {
       type        = "Service"
-      identifiers = "lambda.amazonaws.com"
+      identifiers = ["lambda.amazonaws.com"]
     }
   }
 }
 
 resource "aws_iam_role_policy_attachment" "cloudwatch_logs" {
   policy_arn = "arn:${local.partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-  role       = aws_iam_role.this[0].name
+  role       = aws_iam_role.this.name
 }
 
 resource "aws_lambda_function" "this" {
@@ -54,9 +54,9 @@ resource "aws_lambda_function" "this" {
   layers                         = var.layers
   memory_size                    = var.memory_size
   reserved_concurrent_executions = var.reserved_concurrent_executions
-  role                           = aws_iam_role.this[0].arn
+  role                           = aws_iam_role.this.arn
   runtime                        = var.runtime
-  tags                           = name.tags
+  tags                           = module.name.tags
   timeout                        = var.timeout
 
   dynamic "ephemeral_storage" {
