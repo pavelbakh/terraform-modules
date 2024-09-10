@@ -24,13 +24,13 @@ variable "component" {
 
 variable "delimiter" {
   type        = string
-  default     = null
+  default     = "-"
   description = "Delimiter between ID elements."
 }
 
 variable "label_case" {
   type        = string
-  default     = null
+  default     = "lower"
   description = "Letter case of label elements"
 
   validation {
