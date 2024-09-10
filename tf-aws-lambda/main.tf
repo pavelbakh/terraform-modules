@@ -46,6 +46,7 @@ resource "aws_iam_role_policy_attachment" "cloudwatch_logs" {
 resource "aws_lambda_function" "this" {
   function_name                  = local.fully_qualified_name
   handler                        = var.handler
+  filename                       = var.filename
   s3_bucket                      = var.s3_bucket
   s3_key                         = var.s3_key
   s3_object_version              = var.s3_object_version

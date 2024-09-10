@@ -39,10 +39,16 @@ variable "label_case" {
   }
 }
 
+variable "filename" {
+  type        = string
+  description = "The path to the function's deployment package within the local filesystem. Exactly one of filename or s3_bucket must be specified."
+  default     = null
+}
+
 variable "s3_bucket" {
   type        = string
   description = <<EOF
-  The S3 bucket location containing the function's deployment package. Conflicts with filename and image_uri.
+  The S3 bucket location containing the function's deployment package. Exactly one of filename or s3_bucket must be specified.
   This bucket must reside in the same AWS region where you are creating the Lambda function.
   EOF
   default     = null
@@ -50,13 +56,13 @@ variable "s3_bucket" {
 
 variable "s3_key" {
   type        = string
-  description = "The S3 key of an object containing the function's deployment package. Conflicts with filename and image_uri."
+  description = "The S3 key of an object containing the function's deployment package. Only if s3_bucket is specified."
   default     = null
 }
 
 variable "s3_object_version" {
   type        = string
-  description = "The object version containing the function's deployment package. Conflicts with filename and image_uri."
+  description = "The object version containing the function's deployment package. Only if s3_bucket is specified."
   default     = null
 }
 
