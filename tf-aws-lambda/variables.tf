@@ -140,3 +140,11 @@ variable "cloudwatch_logs_retention_in_days" {
   EOF
   default     = null
 }
+
+variable "lambda_environment" {
+  type = object({
+    variables = map(string)
+  })
+  description = "Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present."
+  default     = null
+}

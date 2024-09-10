@@ -66,6 +66,13 @@ resource "aws_lambda_function" "this" {
       size = var.ephemeral_storage_size
     }
   }
+
+  dynamic "environment" {
+    for_each = var.lambda_environment != null ? [var.lambda_environment] : []
+    content {
+      variables = environment.value.variables
+    }
+  }
 }
 
 data "aws_partition" "this" {
