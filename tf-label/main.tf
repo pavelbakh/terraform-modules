@@ -16,6 +16,7 @@ locals {
     component   = var.component == null ? "" : var.component
     delimiter   = var.delimiter == null ? "-" : var.delimiter
     label_case  = var.label_case == null ? "lower" : var.label_case
+    tags        = var.tags == null ? {} : var.tags
   }
 
   string_id_label_names = ["namespace", "environment", "project", "component"]
@@ -42,12 +43,14 @@ locals {
 
   labels_as_tags = keys(local.tags_context)
 
-  tags = {
+  generated_tags = {
     for l in setintersection(keys(local.tags_context), local.labels_as_tags) :
     local.label_case == "upper" ? upper(l) : lower(l)
         => local.tags_context[l] if length(local.tags_context[l]) > 0
   }
 
-  id = join(local.delimiter, [local.namespace, local.environment, local.project, local.component])
+  tags = merge(local.generated_tags, local.input.tags)
+
+  id = join(local.delimiter, [local.namespace, local.project, local.component, local.environment])
 
 }

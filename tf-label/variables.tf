@@ -38,3 +38,9 @@ variable "label_case" {
     error_message = "Allowed values: `lower`, `upper`."
   }
 }
+
+variable "tags" {
+  type        = map(string)
+  default     = {}
+  description = "Additional custom tags (e.g. `{'Billing': 'Department_1'}`)."
+}
