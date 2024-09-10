@@ -15,6 +15,7 @@ module "name" {
 
 resource "aws_lambda_layer_version" "this" {
   layer_name          = local.fully_qualified_name
+  filename            = var.filename
   s3_key              = var.s3_key
   s3_bucket           = var.s3_bucket
   s3_object_version   = var.s3_object_version
