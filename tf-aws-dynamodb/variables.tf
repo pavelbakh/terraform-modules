@@ -39,6 +39,12 @@ variable "label_case" {
   }
 }
 
+variable "tags" {
+  type        = map(string)
+  default     = {}
+  description = "Additional custom tags (e.g. `{'Billing': 'Department_1'}`)."
+}
+
 variable "table_name" {
   type        = string
   default     = null

@@ -44,6 +44,7 @@ module "example" {
 | AWS Lambda | [tf-aws-lambda](https://github.com/Devoteam/terraform-modules/tree/main/tf-aws-lambda)        | Terraform module for launching Lambda Functions  |
 | AWS Lambda Layer | [tf-aws-lambda-layer](https://github.com/Devoteam/terraform-modules/tree/main/tf-aws-lambda-layer)        | Terraform module for Lambda Functions Layer definition  |
 | AWS DynamoDb | [tf-aws-dynamodb](https://github.com/Devoteam/terraform-modules/tree/main/tf-aws-dynamodb)        | Terraform module for DynamoDb table definition  |
+| AWS S3 Bucket | [tf-aws-s3-bucket](https://github.com/Devoteam/terraform-modules/tree/main/tf-aws-s3-bucket)        | Terraform module for AWS S3 Bucket definition  |
 
 ## Contributing
 

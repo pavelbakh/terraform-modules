@@ -32,6 +32,7 @@ module "name" {
   project     = var.project
   component   = var.component
   label_case  = var.label_case
+  tags        = var.tags
 }
 
 resource "aws_dynamodb_table" "default" {

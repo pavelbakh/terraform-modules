@@ -39,31 +39,37 @@ variable "label_case" {
   }
 }
 
+variable "tags" {
+  type        = map(string)
+  default     = {}
+  description = "Additional custom tags (e.g. `{'Billing': 'Department_1'}`)."
+}
+
 variable "filename" {
   type        = string
-  description = "The path to the function's deployment package within the local filesystem. Exactly one of filename or s3_bucket must be specified."
   default     = null
+  description = "The path to the function's deployment package within the local filesystem. Exactly one of filename or s3_bucket must be specified."
 }
 
 variable "s3_bucket" {
   type        = string
+  default     = null
   description = <<EOF
   The S3 bucket location containing the function's deployment package. Exactly one of filename or s3_bucket must be specified.
   This bucket must reside in the same AWS region where you are creating the Lambda function.
   EOF
-  default     = null
 }
 
 variable "s3_key" {
   type        = string
-  description = "The S3 key of an object containing the function's deployment package. Only if s3_bucket is specified."
   default     = null
+  description = "The S3 key of an object containing the function's deployment package. Only if s3_bucket is specified."
 }
 
 variable "s3_object_version" {
   type        = string
-  description = "The object version containing the function's deployment package. Only if s3_bucket is specified."
   default     = null
+  description = "The object version containing the function's deployment package. Only if s3_bucket is specified."
 }
 
 variable "function_name" {
@@ -73,84 +79,84 @@ variable "function_name" {
 
 variable "description" {
   type        = string
-  description = "Description of what the Lambda Function does."
   default     = null
+  description = "Description of what the Lambda Function does."
 }
 
 variable "architectures" {
   type        = list(string)
+  default     = null
   description = <<EOF
     Instruction set architecture for the Lambda function. Valid values are ["x86_64"] and ["arm64"].
     Default is ["x86_64"].
   EOF
-  default     = null
 }
 
 variable "handler" {
   type        = string
-  description = "The function entrypoint in your code."
   default     = null
+  description = "The function entrypoint in your code."
 }
 
 variable "memory_size" {
   type        = number
-  description = "Amount of memory in MB the Lambda Function can use at runtime."
   default     = 128
+  description = "Amount of memory in MB the Lambda Function can use at runtime."
 }
 
 variable "ephemeral_storage_size" {
   type        = number
+  default     = null
   description = <<EOF
   The size of the Lambda function Ephemeral storage (/tmp) represented in MB.
   The minimum supported ephemeral_storage value defaults to 512MB and the maximum supported value is 10240MB.
   EOF
-  default     = null
 }
 
 variable "reserved_concurrent_executions" {
   type        = number
-  description = "The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations."
   default     = -1
+  description = "The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations."
 }
 
 variable "runtime" {
   type        = string
-  description = "The runtime environment for the Lambda function you are uploading."
   default     = null
+  description = "The runtime environment for the Lambda function you are uploading."
 }
 
 variable "timeout" {
   type        = number
-  description = "The amount of time the Lambda Function has to run in seconds."
   default     = 3
+  description = "The amount of time the Lambda Function has to run in seconds."
 }
 
 variable "layers" {
   type        = list(string)
-  description = "List of Lambda Layer Version ARNs (maximum of 5) to attach to the Lambda Function."
   default     = []
+  description = "List of Lambda Layer Version ARNs (maximum of 5) to attach to the Lambda Function."
 }
 
 variable "cloudwatch_logs_retention_in_days" {
   type        = number
+  default     = null
   description = <<EOF
   Specifies the number of days you want to retain log events in the specified log group. Possible values are:
   1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, 3653, and 0. If you select 0, the events in the
   log group are always retained and never expire.
   EOF
-  default     = null
 }
 
 variable "lambda_environment" {
   type = object({
     variables = map(string)
   })
-  description = "Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present."
   default     = null
+  description = "Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present."
 }
 
 variable "custom_iam_policy_arns" {
   type        = set(string)
-  description = "ARNs of custom policies to be attached to the lambda role"
   default     = []
+  description = "ARNs of custom policies to be attached to the lambda role"
 }

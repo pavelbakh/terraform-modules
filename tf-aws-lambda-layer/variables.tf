@@ -41,51 +41,51 @@ variable "label_case" {
 
 variable "filename" {
   type        = string
-  description = "The path to the layer's deployment package within the local filesystem. Exactly one of filename or s3_bucket must be specified."
   default     = null
+  description = "The path to the layer's deployment package within the local filesystem. Exactly one of filename or s3_bucket must be specified."
 }
 
 variable "s3_bucket" {
   type        = string
+  default     = null
   description = <<EOF
   The S3 bucket location containing the function's deployment package. Exactly one of filename or s3_bucket must be specified.
   This bucket must reside in the same AWS region where you are creating the Lambda function.
   EOF
-  default     = null
 }
 
 variable "s3_key" {
   type        = string
-  description = "The S3 key of an object containing the function's deployment package. Only if s3_bucket is specified."
   default     = null
+  description = "The S3 key of an object containing the function's deployment package. Only if s3_bucket is specified."
 }
 
 variable "s3_object_version" {
   type        = string
-  description = "The object version containing the function's deployment package. Only if s3_bucket is specified."
   default     = null
+  description = "The object version containing the function's deployment package. Only if s3_bucket is specified."
 }
 
 variable "layer_name" {
   type        = string
-  description = "Layer name"
   default     = null
+  description = "Layer name"
 }
 
 variable "description" {
   type        = string
-  description = "Description of the Lambda layer."
   default     = null
+  description = "Description of the Lambda layer."
 }
 
 variable "compatible_architectures" {
   type        = list(string)
-  description = "List of Architectures this layer is compatible with. Currently x86_64 and arm64 can be specified."
   default     = null
+  description = "List of Architectures this layer is compatible with. Currently x86_64 and arm64 can be specified."
 }
 
 variable "compatible_runtimes" {
   type        = list(string)
-  description = "List of Runtimes this layer is compatible with. Up to 15 runtimes can be specified."
   default     = null
+  description = "List of Runtimes this layer is compatible with. Up to 15 runtimes can be specified."
 }
