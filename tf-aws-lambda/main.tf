@@ -2,6 +2,7 @@
 locals {
   fully_qualified_name = "${module.name.id}-${var.function_name}"
   partition   = data.aws_partition.this[0].partition
+  custom_iam_policy_arns_map = length(var.custom_iam_policy_arns) > 0 ? { for i, arn in var.custom_iam_policy_arns : i => arn } : {}
 }
 
 module "name" {
@@ -40,6 +41,13 @@ data "aws_iam_policy_document" "assume_role_policy" {
 
 resource "aws_iam_role_policy_attachment" "cloudwatch_logs" {
   policy_arn = "arn:${local.partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  role       = aws_iam_role.this.name
+}
+
+resource "aws_iam_role_policy_attachment" "custom" {
+  for_each = local.custom_iam_policy_arns_map
+
+  policy_arn = each.value
   role       = aws_iam_role.this.name
 }
 
