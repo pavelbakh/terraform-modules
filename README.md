@@ -43,6 +43,7 @@ module "example" {
 | Label  | [tf-label](https://github.com/Devoteam/terraform-modules/tree/main/tf-label)        | Terraform module for consistent names and tags generation for resources.  |
 | AWS Lambda | [tf-aws-lambda](https://github.com/Devoteam/terraform-modules/tree/main/tf-aws-lambda)        | Terraform module for launching Lambda Functions  |
 | AWS Lambda Layer | [tf-aws-lambda-layer](https://github.com/Devoteam/terraform-modules/tree/main/tf-aws-lambda-layer)        | Terraform module for Lambda Functions Layer definition  |
+| AWS DynamoDb | [tf-aws-dynamodb](https://github.com/Devoteam/terraform-modules/tree/main/tf-dynamodb)        | Terraform module for DynamoDb table definition  |
 
 ## Contributing
 

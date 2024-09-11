@@ -1,9 +1,9 @@
+# Description: This module is used to generate labels and tags for resources in Terraform.
 terraform {
   required_version = ">= 0.13.0"
 }
 
 locals {
-
   defaults = {
     delimiter   = "-"
     label_case  = "lower"
@@ -52,5 +52,4 @@ locals {
   tags = merge(local.generated_tags, local.input.tags)
 
   id = join(local.delimiter, [local.namespace, local.project, local.component, local.environment])
-
 }

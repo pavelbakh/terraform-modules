@@ -1,4 +1,7 @@
 # Description: This module creates a Lambda Layer.
+terraform {
+  required_version = ">= 0.13.0"
+}
 
 locals {
   fully_qualified_name = "${module.name.id}-${var.layer_name}"

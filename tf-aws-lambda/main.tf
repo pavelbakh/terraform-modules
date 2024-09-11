@@ -1,4 +1,8 @@
 # Description: This module creates an AWS Lambda function.
+terraform {
+  required_version = ">= 0.13.0"
+}
+
 locals {
   fully_qualified_name = "${module.name.id}-${var.function_name}"
   partition   = data.aws_partition.this[0].partition
