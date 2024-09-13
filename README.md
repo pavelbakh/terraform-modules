@@ -25,7 +25,6 @@ The repository is organized as follows:
 module "example" {
   source = "git::https://github.com/devoteam/terraform-modules.git//example"
 }
-
 ```
 
 
