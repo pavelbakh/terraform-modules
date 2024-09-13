@@ -21,17 +21,9 @@ The repository is organized as follows:
 
 ## Usage
 
-Terraform will recognize unprefixed github.com URLs and interpret them automatically as Git repository sources.
 ```
 module "example" {
-  source = "github.com/devoteam/terraform-modules/example"
-}
-```
-
-The above address scheme will clone over HTTPS. To clone over SSH, use the following form:
-```
-module "example" {
-  source = "git@github.com:devoteam/terraform-modules.git/example"
+  source = "git::https://github.com/devoteam/terraform-modules.git//example"
 }
 
 ```
