@@ -25,7 +25,6 @@ resource "aws_cloudwatch_log_group" "this" {
   tags              = module.name.tags 
 }
 
-
 resource "aws_iam_role" "this" {
   name                 = local.fully_qualified_name
   assume_role_policy   = join("", data.aws_iam_policy_document.assume_role_policy[*].json)
