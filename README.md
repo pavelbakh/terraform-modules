@@ -45,6 +45,7 @@ module "example" {
 | AWS Lambda Layer | [tf-aws-lambda-layer](https://github.com/Devoteam/terraform-modules/tree/main/tf-aws-lambda-layer)        | Terraform module for Lambda Functions Layer definition  |
 | AWS DynamoDb | [tf-aws-dynamodb](https://github.com/Devoteam/terraform-modules/tree/main/tf-aws-dynamodb)        | Terraform module for DynamoDb table definition  |
 | AWS S3 Bucket | [tf-aws-s3-bucket](https://github.com/Devoteam/terraform-modules/tree/main/tf-aws-s3-bucket)        | Terraform module for AWS S3 Bucket definition  |
+| AWS REST API Gateway | [tf-aws-rest-api-gateway](https://github.com/Devoteam/terraform-modules/tree/main/tf-aws-rest-api-gateway)        | Terraform module for AWS REST API Gateway definition  |
 
 ## Contributing
 
