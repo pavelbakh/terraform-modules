@@ -4,6 +4,6 @@ output "bucket_id" {
 }
 
 output "bucket_arn" {
-  value       = join("", aws_s3_bucket.default[*].arn)
+  value       = join("", aws_s3_bucket.this.arn)
   description = "Bucket ARN"
 }
