@@ -10,7 +10,7 @@ locals {
 
   full_name   = var.bucket_name != "" && !var.include_prefix ? var.bucket_name : "${module.name.id}-${var.bucket_name}"
   bucket_name = var.include_account_id ? "${local.partition}-${local.full_name}" : local.full_name
-  bucket_id   = join("", aws_s3_bucket.default[*].id)
+  bucket_id   = join("", aws_s3_bucket.this.id)
   bucket_arn  = "arn:${local.partition}:s3:::${local.bucket_id}"
 }
 
@@ -24,13 +24,13 @@ module "name" {
   tags        = var.tags
 }
 
-resource "aws_s3_bucket" "default" {
+resource "aws_s3_bucket" "this" {
   bucket  = local.bucket_name
 
   tags    = module.this.tags
 }
 
-resource "aws_s3_bucket_versioning" "default" {
+resource "aws_s3_bucket_versioning" "this" {
   bucket = local.bucket_id
 
   versioning_configuration {
@@ -38,7 +38,7 @@ resource "aws_s3_bucket_versioning" "default" {
   }
 }
 
-resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
+resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
   bucket = local.bucket_id
 
   rule {
@@ -141,7 +141,7 @@ data "aws_iam_policy_document" "bucket_policy" {
   }
 }
 
-resource "aws_s3_bucket_policy" "default" {
+resource "aws_s3_bucket_policy" "this" {
   count = (
     var.allow_ssl_requests_only ||
     var.allow_encrypted_uploads_only
@@ -149,10 +149,10 @@ resource "aws_s3_bucket_policy" "default" {
 
   bucket     = local.bucket_id
   policy     = one(data.aws_iam_policy_document.bucket_policy[*].json)
-  depends_on = [aws_s3_bucket_public_access_block.default]
+  depends_on = [aws_s3_bucket_public_access_block.this]
 }
 
-resource "aws_s3_bucket_public_access_block" "default" {
+resource "aws_s3_bucket_public_access_block" "this" {
   bucket                  = local.bucket_id
 
   block_public_acls       = var.block_public_acls
