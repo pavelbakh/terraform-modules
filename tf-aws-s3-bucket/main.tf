@@ -4,12 +4,13 @@ terraform {
 }
 
 data "aws_partition" "current" {}
+data "aws_caller_identity" "current" {}
 
 locals {
   partition   = join("", data.aws_partition.current[*].partition)
 
   full_name   = var.bucket_name != "" && !var.include_prefix ? var.bucket_name : "${module.name.id}-${var.bucket_name}"
-  bucket_name = var.include_account_id ? "${local.partition}-${local.full_name}" : local.full_name
+  bucket_name = var.include_account_id ? "${data.aws_caller_identity.current.account_id}-${local.full_name}" : local.full_name
   bucket_id   = join("", aws_s3_bucket.this[*].id)
   bucket_arn  = "arn:${local.partition}:s3:::${local.bucket_id}"
 }
