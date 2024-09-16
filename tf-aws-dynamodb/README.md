@@ -13,9 +13,9 @@ module "dynamodb_table" {
   project               = "genai"
   component             = "db"
 
-  name                         = "logs_table"
-  hash_key                     = "HashKey"
-  range_key                    = "RangeKey"
+  table_name            = "logs_table"
+  hash_key              = "HashKey"
+  range_key             = "RangeKey"
 
   dynamodb_attributes = [
     {

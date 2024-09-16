@@ -14,14 +14,14 @@ locals {
     ],
     var.dynamodb_attributes
   )
-  attributes_final = length(var.range_key) == 0 ? attributes : concat(
+  attributes_final = length(var.range_key) == 0 ? local.attributes : concat(
+    local.attributes,
     [
       {
         name = var.range_key
         type = var.range_key_type
       }
-    ],
-    attributes
+    ]
   )
 }
 
