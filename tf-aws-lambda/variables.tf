@@ -155,8 +155,8 @@ variable "lambda_environment" {
   description = "Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present."
 }
 
-variable "custom_iam_policy_arns" {
-  type        = set(string)
-  default     = []
-  description = "ARNs of custom policies to be attached to the lambda role"
+variable "inline_iam_policy" {
+  type        = string
+  description = "Inline policy document (JSON) to attach to the lambda role"
+  default     = null
 }

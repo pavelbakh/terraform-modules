@@ -6,7 +6,6 @@ terraform {
 locals {
   fully_qualified_name = "${module.name.id}-${var.function_name}"
   partition   = data.aws_partition.this[0].partition
-  custom_iam_policy_arns_map = length(var.custom_iam_policy_arns) > 0 ? { for i, arn in var.custom_iam_policy_arns : i => arn } : {}
 }
 
 module "name" {
@@ -48,11 +47,11 @@ resource "aws_iam_role_policy_attachment" "cloudwatch_logs" {
   role       = aws_iam_role.this.name
 }
 
-resource "aws_iam_role_policy_attachment" "custom" {
-  for_each = local.custom_iam_policy_arns_map
+resource "aws_iam_role_policy" "inline" {
+  count = var.inline_iam_policy != null ? 1 : 0
 
-  policy_arn = each.value
-  role       = aws_iam_role.this.name
+  role   = aws_iam_role.this.name
+  policy = var.inline_iam_policy
 }
 
 resource "aws_lambda_function" "this" {
