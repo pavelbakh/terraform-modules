@@ -45,12 +45,16 @@ variable "tags" {
   description = "Additional custom tags (e.g. `{'Billing': 'Department_1'}`)."
 }
 
-# See https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html for additional 
-# configuration information.
-variable "openapi_config" {
-  description = "The OpenAPI specification for the API"
-  type        = any
+variable "api_template" {
+  type        = string
+  default     = null
+  description = "API Gateway OpenAPI 3 template file"
+}
+
+variable "api_template_vars" {
+  type        = map(string)
   default     = {}
+  description = "Variables required in the OpenAPI template file"
 }
 
 variable "endpoint_type" {

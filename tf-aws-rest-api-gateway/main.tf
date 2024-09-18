@@ -4,8 +4,15 @@ terraform {
 }
 
 locals {
-  create_log_group       = var.logging_level != "OFF"
-  log_group_arn          = local.create_log_group ? module.cloudwatch_log_group.log_group_arn : null
+  create_log_group = var.logging_level != "OFF"
+  log_group_arn    = local.create_log_group ? module.cloudwatch_log_group.log_group_arn : null
+  stage_name       = var.stage_name != "" ? var.stage_name : module.name.environment
+}
+
+data "template_file" "this" {
+  template = var.api_template
+
+  vars = var.api_template_vars
 }
 
 module "name" {
@@ -20,7 +27,7 @@ module "name" {
 
 resource "aws_api_gateway_rest_api" "this" {
   name = module.name.id
-  body = jsonencode(var.openapi_config)
+  body = data.template_file.this.rendered
   tags = module.name.tags
 
   endpoint_configuration {
@@ -51,7 +58,7 @@ resource "aws_api_gateway_deployment" "this" {
 resource "aws_api_gateway_stage" "this" {
   deployment_id        = aws_api_gateway_deployment.this.id
   rest_api_id          = aws_api_gateway_rest_api.this.id
-  stage_name           = var.stage_name != "" ? var.stage_name : module.this.stage
+  stage_name           = local.stage_name
   xray_tracing_enabled = var.xray_tracing_enabled
   tags                 = module.name.tags
 
@@ -68,7 +75,7 @@ resource "aws_api_gateway_stage" "this" {
 resource "aws_cloudwatch_log_group" "this" {
   count = local.create_log_group ? 1 : 0
 
-  name              = "${aws_api_gateway_rest_api.this.id}/${var.stage_name}"
+  name              = "${aws_api_gateway_rest_api.this.id}/${local.stage_name}"
   retention_in_days = var.cloudwatch_logs_retention_in_days
 }
 
