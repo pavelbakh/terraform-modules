@@ -65,7 +65,7 @@ resource "aws_api_gateway_stage" "this" {
     for_each = local.create_log_group ? [1] : []
 
     content {
-      destination_arn = aws_cloudwatch_log_group.this.arn
+      destination_arn = aws_cloudwatch_log_group.this[0].arn
       format          = replace(var.access_log_format, "\n", "")
     }
   }
