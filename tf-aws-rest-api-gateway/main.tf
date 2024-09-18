@@ -5,7 +5,7 @@ terraform {
 
 locals {
   create_log_group = var.logging_level != "OFF"
-  stage_name       = var.stage_name != "" ? var.stage_name : module.name.environment
+  stage_name       = var.stage_name != "" ? var.stage_name : var.environment
 }
 
 data "template_file" "this" {
@@ -35,7 +35,7 @@ resource "aws_api_gateway_rest_api" "this" {
 }
 
 resource "aws_api_gateway_rest_api_policy" "this" {
-  count       = var.rest_api_policy ? 1 : 0
+  count       = var.rest_api_policy != null ? 1 : 0
   rest_api_id = aws_api_gateway_rest_api.this.id
 
   policy = var.rest_api_policy
