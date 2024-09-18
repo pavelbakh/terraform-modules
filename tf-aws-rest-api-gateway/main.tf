@@ -71,13 +71,6 @@ resource "aws_api_gateway_stage" "this" {
   }
 }
 
-resource "aws_cloudwatch_log_group" "this" {
-  count = local.create_log_group ? 1 : 0
-
-  name              = "${aws_api_gateway_rest_api.this.id}/${local.stage_name}"
-  retention_in_days = var.cloudwatch_logs_retention_in_days
-}
-
 resource "aws_api_gateway_method_settings" "all" {
   rest_api_id = aws_api_gateway_rest_api.this.id
   stage_name  = aws_api_gateway_stage.this.stage_name
@@ -88,4 +81,48 @@ resource "aws_api_gateway_method_settings" "all" {
     logging_level      = var.logging_level
     data_trace_enabled = var.data_trace_enabled
   }
+}
+
+resource "aws_cloudwatch_log_group" "this" {
+  count = local.create_log_group ? 1 : 0
+
+  name              = "${aws_api_gateway_rest_api.this.id}/${local.stage_name}"
+  retention_in_days = var.cloudwatch_logs_retention_in_days
+}
+
+resource "aws_iam_role" "this" {
+  name = "${module.name.id}-api-gateway"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "apigateway.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+
+resource "aws_iam_role_policy" "this" {
+  name = "${module.name.id}-api-gateway"
+  role = aws_iam_role.this.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
 }
