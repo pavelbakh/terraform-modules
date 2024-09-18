@@ -92,12 +92,7 @@ resource "aws_cloudwatch_log_group" "this" {
 
 resource "aws_cloudwatch_log_stream" "this" {
   name           = "${module.name.id}-cloudwatch-log-stream"
-  log_group_name = aws_cloudwatch_log_group.example.name
-}
-
-resource "aws_iam_account_setting" "cloudwatch_logs_role_arn" {
-  name  = "${module.name.id}-cloudwatch:logs:roleArn"
-  value = aws_iam_role.cloudwatch_logs_role.arn
+  log_group_name = aws_cloudwatch_log_group.this.name
 }
 
 resource "aws_iam_role" "cloudwatch_logs_role" {
