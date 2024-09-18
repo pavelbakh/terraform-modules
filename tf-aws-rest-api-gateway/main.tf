@@ -90,12 +90,7 @@ resource "aws_cloudwatch_log_group" "this" {
   retention_in_days = var.cloudwatch_logs_retention_in_days
 }
 
-resource "aws_cloudwatch_log_stream" "this" {
-  name           = "${module.name.id}-cloudwatch-log-stream"
-  log_group_name = aws_cloudwatch_log_group.this[0].name
-}
-
-resource "aws_iam_role" "cloudwatch_logs_role" {
+resource "aws_iam_role" "api_gateway_cloudwatch_role" {
   name = "${module.name.id}-cloudwatch-logs-role"
 
   assume_role_policy = jsonencode({
@@ -111,24 +106,11 @@ resource "aws_iam_role" "cloudwatch_logs_role" {
     ]
   })
 }
+resource "aws_iam_role_policy_attachment" "api_gateway_cloudwatch_policy" {
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+  role       = aws_iam_role.api_gateway_cloudwatch_role.name
+}
 
-resource "aws_iam_role_policy" "cloudwatch-logs-policy" {
-  name = "${module.name.id}-cloudwatch-logs-policy"
-  role = aws_iam_role.cloudwatch_logs_role.id
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = [
-          "logs:CreateLogGroup",
-          "logs:CreateLogStream",
-          "logs:PutLogEvents",
-          "logs:DescribeLogStreams"
-        ]
-        Effect   = "Allow"
-        Resource = "*"
-      },
-    ]
-  })
+resource "aws_api_gateway_account" "this" {
+  cloudwatch_role_arn = aws_iam_role.api_gateway_cloudwatch_role.arn
 }
