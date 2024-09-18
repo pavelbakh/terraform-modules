@@ -5,7 +5,6 @@ terraform {
 
 locals {
   create_log_group = var.logging_level != "OFF"
-  log_group_arn    = local.create_log_group ? module.cloudwatch_log_group.log_group_arn : null
   stage_name       = var.stage_name != "" ? var.stage_name : module.name.environment
 }
 
