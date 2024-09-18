@@ -69,6 +69,8 @@ resource "aws_api_gateway_stage" "this" {
       format          = replace(var.access_log_format, "\n", "")
     }
   }
+
+  depends_on = [aws_api_gateway_account.this]
 }
 
 resource "aws_api_gateway_method_settings" "all" {
@@ -86,7 +88,7 @@ resource "aws_api_gateway_method_settings" "all" {
 resource "aws_cloudwatch_log_group" "this" {
   count = local.create_log_group ? 1 : 0
 
-  name              = "${aws_api_gateway_rest_api.this.id}/${local.stage_name}"
+  name              = "/aws/api_gateway/${aws_api_gateway_rest_api.this.name}/${local.stage_name}"
   retention_in_days = var.cloudwatch_logs_retention_in_days
 }
 
