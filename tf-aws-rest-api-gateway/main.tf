@@ -90,8 +90,18 @@ resource "aws_cloudwatch_log_group" "this" {
   retention_in_days = var.cloudwatch_logs_retention_in_days
 }
 
-resource "aws_iam_role" "this" {
-  name = "${module.name.id}-api-gateway"
+resource "aws_cloudwatch_log_stream" "this" {
+  name           = "${module.name.id}-cloudwatch-log-stream"
+  log_group_name = aws_cloudwatch_log_group.example.name
+}
+
+resource "aws_iam_account_setting" "cloudwatch_logs_role_arn" {
+  name  = "${module.name.id}-cloudwatch:logs:roleArn"
+  value = aws_iam_role.cloudwatch_logs_role.arn
+}
+
+resource "aws_iam_role" "cloudwatch_logs_role" {
+  name = "${module.name.id}-cloudwatch-logs-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -107,9 +117,9 @@ resource "aws_iam_role" "this" {
   })
 }
 
-resource "aws_iam_role_policy" "this" {
-  name = "${module.name.id}-api-gateway"
-  role = aws_iam_role.this.id
+resource "aws_iam_role_policy" "cloudwatch-logs-policy" {
+  name = "${module.name.id}-cloudwatch-logs-policy"
+  role = aws_iam_role.cloudwatch_logs_role.id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -119,6 +129,7 @@ resource "aws_iam_role_policy" "this" {
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
           "logs:PutLogEvents",
+          "logs:DescribeLogStreams"
         ]
         Effect   = "Allow"
         Resource = "*"
